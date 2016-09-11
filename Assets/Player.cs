@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 		/*if (direction.Equals (Vector2.up)) {
 			Debug.Log ("Up");
 		*/	
+		direction = direction * 1.1f;
 		Vector2 vectorA = new Vector2 (transform.position.x + direction.x,transform.position.y + direction.y);
 		Vector2 vectorB = Vector2.zero;
 		Vector2 vectorC = Vector2.zero;
@@ -53,13 +54,13 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.DownArrow) && canIGo(Vector2.down)) {
+		if (Input.GetKey (KeyCode.DownArrow) && canIGo(new Vector2(0,-GetComponent<BoxCollider2D>().bounds.extents.y))) {
 			currentDirection = new Vector3 (0, -speed, 0);
-		} else if (Input.GetKey (KeyCode.UpArrow) && canIGo(Vector2.up)) {
+		} else if (Input.GetKey (KeyCode.UpArrow) && canIGo(new Vector2(0,GetComponent<BoxCollider2D>().bounds.extents.y))) {
 			currentDirection = new Vector3 (0, speed, 0);
-		} else if (Input.GetKey (KeyCode.LeftArrow) && canIGo(Vector2.left)) {
+		} else if (Input.GetKey (KeyCode.LeftArrow) && canIGo(new Vector2(-GetComponent<BoxCollider2D>().bounds.extents.x, 0))) {
 			currentDirection = new Vector3 (-speed, 0, 0);
-		} else if (Input.GetKey (KeyCode.RightArrow) && canIGo(Vector2.right)) {
+		} else if (Input.GetKey (KeyCode.RightArrow) && canIGo(new Vector2(GetComponent<BoxCollider2D>().bounds.extents.x, 0))) {
 			currentDirection = new Vector3 (speed, 0, 0);
 		}
 
@@ -72,7 +73,20 @@ public class Player : MonoBehaviour {
 	}
 
 	void move(float x, float y, float z) {
-		if (canIGo (new Vector2(x*10, y*10))) {
+		bool move = false;
+		if (x > 0) {
+			move = canIGo (new Vector2(GetComponent<BoxCollider2D>().bounds.extents.x, 0));
+		}
+		if (x < 0) {
+			move = canIGo (new Vector2(-GetComponent<BoxCollider2D>().bounds.extents.x, 0));
+		}
+		if (y > 0) {
+			move = canIGo (new Vector2(0,GetComponent<BoxCollider2D>().bounds.extents.y));
+		}
+		if (y < 0) {
+			move = canIGo (new Vector2(0,-GetComponent<BoxCollider2D>().bounds.extents.y));
+		}
+		if (move) {
 			this.transform.position += new Vector3 (x, y, z);
 		}
 	}
