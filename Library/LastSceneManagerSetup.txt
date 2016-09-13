@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/danteScene.unity
+- path: Assets/Scenes/tiling_test.unity
   isLoaded: 1
   isActive: 1
