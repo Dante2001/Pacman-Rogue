@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float speed = .08f;
+	public float speed = .05f;
 	public Vector3 currentDirection;
+
+	public ItemOnInventory usingItem = null;
 
 	/*void OnCollisionEnter2D(Collision2D col) {
 		Debug.Log (col.collider.tag);
@@ -33,9 +35,11 @@ public class Player : MonoBehaviour {
 			vectorB = new Vector2 (transform.position.x + direction.x  - (GetComponent<BoxCollider2D>().bounds.extents.x),transform.position.y + direction.y);
 			vectorC = new Vector2 (transform.position.x + direction.x  + (GetComponent<BoxCollider2D>().bounds.extents.x),transform.position.y + direction.y);
 		}
+
 		Debug.DrawLine(this.transform.position, new Vector3(transform.position.x+ direction.x,transform.position.y+direction.y,0),Color.red,.1f,false);
 		Debug.DrawLine(this.transform.position, vectorB,Color.red,.1f,false);
 		Debug.DrawLine(this.transform.position, vectorC,Color.red,.1f,false);
+
 
 		if (Physics2D.OverlapPoint (vectorA, 1 << 8) || Physics2D.OverlapPoint (vectorB, 1 << 8) || Physics2D.OverlapPoint (vectorC, 1 << 8)) {
 			//i can't go, there's a wall there
@@ -53,7 +57,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (Input.GetKey (KeyCode.DownArrow) && canIGo(new Vector2(0,-GetComponent<BoxCollider2D>().bounds.extents.y))) {
 			currentDirection = new Vector3 (0, -speed, 0);
 		} else if (Input.GetKey (KeyCode.UpArrow) && canIGo(new Vector2(0,GetComponent<BoxCollider2D>().bounds.extents.y))) {
@@ -65,6 +69,10 @@ public class Player : MonoBehaviour {
 		}
 
 		move (currentDirection.x,currentDirection.y,currentDirection.z);
+
+		if (!object.ReferenceEquals(usingItem,null)) {
+			Debug.Log ("Not null");
+		}
 
 	}
 
