@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using ItemHelper;
 
 public static class GameManager {
 
@@ -32,5 +34,9 @@ public static class GameManager {
             { BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER }
         };
     }
+	
+	public static int hp=3;
+
+	public static List<ItemType> inventory = new List<ItemType>();
 
 }
