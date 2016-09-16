@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Monster : Hittable {
 
@@ -37,11 +38,12 @@ public class Monster : Hittable {
 
     public GameObject player;
 
-    private Vector2[] path;
+    private List<Vector2> path;
     private int pathIndex;
 
     private Spotter spotter;
     private SimpleAutoAttack attack;
+    private AStarPathing astar;
 
 	// Use this for initialization
 	void Start () {
@@ -68,6 +70,12 @@ public class Monster : Hittable {
         // the component slightly more modular
         attack.alwaysAttack = false;
         attack.nameOfTargets = new string[] { player.name };
+
+        astar = this.GetComponent<AStarPathing>();
+        astar.grid = GameManager.level;
+        astar.validSqrCosts.Add(GameManager.ITEM, 1);
+        astar.validSqrCosts.Add(GameManager.COIN, 1);
+        astar.CalculatePathForWaypoints(waypoints);
 	}
 	
 	// Update is called once per frame
@@ -139,7 +147,7 @@ public class Monster : Hittable {
 
     private void Move()
     {
-        if (pathIndex == -1 || pathIndex >= path.GetLength(0))
+        if (pathIndex == -1 || pathIndex >= path.Count)
             GetNewPath();
 
         if (((Vector3)path[pathIndex] - this.transform.position).magnitude <= speed * Time.deltaTime)
@@ -150,11 +158,10 @@ public class Monster : Hittable {
 
     private void GetNewPath()
     {
-        // if (pathState == PATH_STATE.NOT_FOLLOW) path = GetPathForNextWaypoint();
+        if (pathState == PATH_STATE.NOT_FOLLOW) path = astar.GetNextPath();
         // else path = GetPathForTarget(x,y);
         pathIndex = 0;
-        path[pathIndex].x *= GameManager.tileWidth;
-        path[pathIndex].y *= GameManager.tileHeight;
+        path[pathIndex] = new Vector2(path[pathIndex].x * GameManager.tileWidth, path[pathIndex].y * GameManager.tileHeight);
     }
 
     void OnTriggerEnter2D(Collider2D col)
