@@ -9,10 +9,12 @@ public class ItemOnGround : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.gameObject.tag.Equals ("Player")) {
+		if (col.gameObject.tag.Equals ("Player") && type != ItemType.Coin) {
 			GameManager.inventory.Add (type);
-			Destroy (this.gameObject);
+		} else if (col.gameObject.tag.Equals ("Player") && type == ItemType.Coin) {
+			GameManager.coins++;
 		}
+		Destroy (this.gameObject);
 	}
 
 	// Use this for initialization

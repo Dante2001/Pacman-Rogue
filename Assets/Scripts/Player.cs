@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ItemHelper;
 
 public class Player : MonoBehaviour {
 
-	public float speed = .05f;
-	public Vector3 currentDirection;
+	enum Orientation{UP,DOWN,LEFT,RIGHT,NONE};
 
-	public ItemOnInventory usingItem = null;
+	public float speed = .05f;
+	public float rotatingSpeed = .5f;
+	public Vector3 currentDirection;
+	Orientation currentOrientation = Orientation.NONE;
+	public GameObject hand;
+	public ItemType usingItem = ItemType.Nothing;
 
 	/*void OnCollisionEnter2D(Collision2D col) {
 		Debug.Log (col.collider.tag);
@@ -45,33 +50,72 @@ public class Player : MonoBehaviour {
 			//i can't go, there's a wall there
 
 			return false;
-		}
-		//}
+		} else {
+			//}
 
-		return true;
+			return true;
+		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		currentDirection = new Vector3 (speed, 0, 0);
+		//currentDirection = new Vector3 (speed, 0, 0);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		//CONTROLS
+
+		//MOVEMENT
 		if (Input.GetKey (KeyCode.DownArrow) && canIGo(new Vector2(0,-GetComponent<BoxCollider2D>().bounds.extents.y))) {
 			currentDirection = new Vector3 (0, -speed, 0);
+			currentOrientation = Orientation.DOWN;
 		} else if (Input.GetKey (KeyCode.UpArrow) && canIGo(new Vector2(0,GetComponent<BoxCollider2D>().bounds.extents.y))) {
 			currentDirection = new Vector3 (0, speed, 0);
+			currentOrientation = Orientation.UP;
 		} else if (Input.GetKey (KeyCode.LeftArrow) && canIGo(new Vector2(-GetComponent<BoxCollider2D>().bounds.extents.x, 0))) {
 			currentDirection = new Vector3 (-speed, 0, 0);
+			currentOrientation = Orientation.LEFT;
 		} else if (Input.GetKey (KeyCode.RightArrow) && canIGo(new Vector2(GetComponent<BoxCollider2D>().bounds.extents.x, 0))) {
 			currentDirection = new Vector3 (speed, 0, 0);
+			currentOrientation = Orientation.RIGHT;
 		}
 
+		//USE ITEMS
+
+		//USE SWORD
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			//IF NOT USING SWORD AND I HAVE A SWORD, EQUIP IT
+			if (!usingItem.Equals(ItemType.Sword) && GameManager.inventory.Contains (ItemHelper.ItemType.Sword)) {
+				usingItem = ItemType.Sword;
+			}
+			//IF AM USING A SWORD, UNEQUIP IT
+			else if (usingItem.Equals(ItemType.Sword)) {
+				usingItem = ItemType.Nothing;
+			}
+			
+		}
 		move (currentDirection.x,currentDirection.y,currentDirection.z);
 
-		if (!object.ReferenceEquals(usingItem,null)) {
-			Debug.Log ("Not null");
+		float targetAngle = 0f;
+		if (currentOrientation.Equals(Orientation.UP)) {
+			targetAngle = 90f;
+		}
+		if (currentOrientation.Equals(Orientation.LEFT)) {
+			targetAngle = 180f;
+		}
+		if (currentOrientation.Equals(Orientation.RIGHT)) {
+			targetAngle = 0f;
+		}
+		if (currentOrientation.Equals(Orientation.DOWN)) {
+			targetAngle = 270f;
+		}
+		float zAngle = Mathf.LerpAngle (transform.rotation.eulerAngles.z, targetAngle, rotatingSpeed);
+		transform.eulerAngles = new Vector3(transform.eulerAngles.x,transform.eulerAngles.y,zAngle);
+
+		if (usingItem.Equals (ItemType.Sword)) {
+			Debug.Log ("Swoosh!");
 		}
 
 	}
