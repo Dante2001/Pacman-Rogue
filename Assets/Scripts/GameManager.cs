@@ -36,6 +36,7 @@ public static class GameManager {
     }
 	
 	public static int hp=3;
+	public static int coins=0;
 
 	public static List<ItemType> inventory = new List<ItemType>();
 
