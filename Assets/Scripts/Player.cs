@@ -45,10 +45,11 @@ public class Player : MonoBehaviour {
 			//i can't go, there's a wall there
 
 			return false;
-		}
-		//}
+		} else {
+			//}
 
-		return true;
+			return true;
+		}
 	}
 
 	// Use this for initialization
