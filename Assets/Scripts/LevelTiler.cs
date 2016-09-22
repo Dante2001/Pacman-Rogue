@@ -92,7 +92,7 @@ public class LevelTiler : MonoBehaviour {
             { BORDER, COIN, COIN, COIN, BORDER }
         };*/
         //TileLevel();
-        GameManager.TestLevel1();
+        GameManager.TestLevel2();
         level = GameManager.level;
         TileLevel();
     }
