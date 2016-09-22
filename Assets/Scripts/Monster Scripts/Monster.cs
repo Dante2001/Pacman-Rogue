@@ -35,6 +35,7 @@ public class Monster : Hittable {
     public float respawnTime;
     public float spotRange;
     public float outOfSpotRange;
+    private Vector2 currentWaypoint;
 
     public GameObject player;
 
@@ -48,7 +49,10 @@ public class Monster : Hittable {
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player");
-
+        respawnPoint.x *= GameManager.tileWidth + GameManager.tileWidth / 2;
+        respawnPoint.y *= -GameManager.tileHeight + GameManager.tileHeight / 2;
+        currentWaypoint = respawnPoint;
+        Spawn();
         pathIndex = -1;
         path = null;
 
@@ -128,12 +132,21 @@ public class Monster : Hittable {
         Respawn();
     }
 
+    private void Spawn()
+    {
+        currentHP = maxHP;
+        this.transform.position = respawnPoint;
+        pathIndex = -1;
+        path = null;
+    }
+
     private void Respawn()
     {
         currentHP = maxHP;
         this.transform.position = respawnPoint;
         pathIndex = -1;
         path = null;
+        currentWaypoint = respawnPoint;
         StartCoroutine(RespawnTimer());
     }
 
@@ -150,10 +163,14 @@ public class Monster : Hittable {
         if (pathIndex == -1 || pathIndex >= path.Count)
             GetNewPath();
 
-        if (((Vector3)path[pathIndex] - this.transform.position).magnitude <= speed * Time.deltaTime)
+        if (((Vector3)currentWaypoint - this.transform.position).magnitude <= speed * Time.deltaTime)
+        {
             pathIndex++;
-
-        this.transform.position += ((Vector3)path[pathIndex] - this.transform.position).normalized * speed * Time.deltaTime;       
+            if (pathIndex < path.Count)
+                currentWaypoint = new Vector2((float)path[pathIndex].x * GameManager.tileWidth + GameManager.tileWidth/2, (float)path[pathIndex].y * -GameManager.tileHeight + GameManager.tileHeight/2);
+        }
+        if (pathIndex < path.Count)
+            this.transform.position += ((Vector3)currentWaypoint - this.transform.position).normalized * speed * Time.deltaTime;       
     }
 
     private void GetNewPath()
@@ -161,7 +178,11 @@ public class Monster : Hittable {
         if (pathState == PATH_STATE.NOT_FOLLOW) path = astar.GetNextPath();
         // else path = GetPathForTarget(x,y);
         pathIndex = 0;
-        path[pathIndex] = new Vector2(path[pathIndex].x * GameManager.tileWidth, path[pathIndex].y * GameManager.tileHeight);
+        string s = "";
+        foreach (Vector2 v in path)
+            s += v + " ";
+        Debug.Log("MONSTER PATH " + s);
+        currentWaypoint = new Vector2((float)path[pathIndex].x * GameManager.tileWidth + GameManager.tileWidth/2, (float)path[pathIndex].y * -GameManager.tileHeight + GameManager.tileHeight/2);
     }
 
     void OnTriggerEnter2D(Collider2D col)
