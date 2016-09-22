@@ -10,7 +10,10 @@ public class Player : MonoBehaviour {
 	public float rotatingSpeed = .5f;
 	public Vector3 currentDirection;
 	Orientation currentOrientation = Orientation.NONE;
-	public GameObject hand;
+	public GameObject goHand;
+	public GameObject goSword;
+	public GameObject goBow;
+	public GameObject goMagicMissile;
 	public ItemType usingItem = ItemType.Nothing;
 
 	/*void OnCollisionEnter2D(Collision2D col) {
@@ -23,6 +26,16 @@ public class Player : MonoBehaviour {
 		}
 	}
 */
+
+	public void arcaneExplosion() {
+		GameObject[] goMonsterList = GameObject.FindGameObjectsWithTag ("Monster");
+		for (int i = 0; i < goMonsterList.Length; i++) {
+			GameObject goMissile = (GameObject)Instantiate (goMagicMissile, transform.position, transform.rotation);
+			goMissile.GetComponent<MagicMissile> ().target = goMonsterList [i];
+
+		}
+
+	}
 
 	private bool canIGo(Vector2 direction) {
 		/*if (direction.Equals (Vector2.up)) {
@@ -89,13 +102,42 @@ public class Player : MonoBehaviour {
 			//IF NOT USING SWORD AND I HAVE A SWORD, EQUIP IT
 			if (!usingItem.Equals(ItemType.Sword) && GameManager.inventory.Contains (ItemHelper.ItemType.Sword)) {
 				usingItem = ItemType.Sword;
+				goSword.SetActive (true);
 			}
 			//IF AM USING A SWORD, UNEQUIP IT
 			else if (usingItem.Equals(ItemType.Sword)) {
 				usingItem = ItemType.Nothing;
+				goSword.SetActive (false);
 			}
-			
+
 		}
+
+		//USE BOW
+		if (Input.GetKeyDown (KeyCode.W)) {
+			//IF NOT USING BOW AND I HAVE A BOW, EQUIP IT
+			if (!usingItem.Equals(ItemType.BowAndArrow) && GameManager.inventory.Contains (ItemHelper.ItemType.BowAndArrow)) {
+				usingItem = ItemType.BowAndArrow;
+				goBow.SetActive (true);
+			}
+			//IF AM USING A BOW, UNEQUIP IT
+			else if (usingItem.Equals(ItemType.BowAndArrow)) {
+				usingItem = ItemType.Nothing;
+				goBow.SetActive (false);
+			}
+
+		}
+
+		//USE WAND
+		if (Input.GetKeyDown (KeyCode.E)) {
+			//IF NOT USING BOW AND I HAVE A BOW, EQUIP IT
+			if (!usingItem.Equals(ItemType.Wand) && GameManager.inventory.Contains (ItemHelper.ItemType.Wand)) {
+				//usingItem = ItemType.Wand;
+				GameManager.inventory.Remove (ItemType.Wand);
+				arcaneExplosion ();
+			}
+
+		}
+
 		move (currentDirection.x,currentDirection.y,currentDirection.z);
 
 		float targetAngle = 0f;
@@ -117,10 +159,6 @@ public class Player : MonoBehaviour {
 		if (usingItem.Equals (ItemType.Sword)) {
 			Debug.Log ("Swoosh!");
 		}
-
-	}
-
-	void changeDirection(Vector3 newDirection) {
 
 	}
 
