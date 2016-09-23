@@ -57,6 +57,40 @@ public static class GameManager {
 		};
 	}
 
+	public static void TestLevel3()
+	{
+		level = new char[,]
+		{
+			{ BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   COIN,   BORDER },
+			{ BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER, BORDER },
+		};
+	}
+
 	public static int hp=3;
 	public static int coins=0;
 
