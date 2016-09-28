@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 		/*if (direction.Equals (Vector2.up)) {
 			Debug.Log ("Up");
 		*/	
-		direction = direction * 1.1f;
+		direction = direction * 1.2f;//1.1f;
 		Vector2 vectorA = new Vector2 (transform.position.x + direction.x,transform.position.y + direction.y);
 		Vector2 vectorB = Vector2.zero;
 		Vector2 vectorC = Vector2.zero;
@@ -140,6 +140,7 @@ public class Player : MonoBehaviour {
 
 		move (currentDirection.x,currentDirection.y,currentDirection.z);
 
+
 		float targetAngle = 0f;
 		if (currentOrientation.Equals(Orientation.UP)) {
 			targetAngle = 90f;
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour {
 		if (currentOrientation.Equals(Orientation.DOWN)) {
 			targetAngle = 270f;
 		}
-		float zAngle = Mathf.LerpAngle (transform.rotation.eulerAngles.z, targetAngle, rotatingSpeed);
+		float zAngle = targetAngle;//Mathf.LerpAngle (transform.rotation.eulerAngles.z, targetAngle, rotatingSpeed);
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x,transform.eulerAngles.y,zAngle);
 
 		if (usingItem.Equals (ItemType.Sword)) {
@@ -179,5 +180,7 @@ public class Player : MonoBehaviour {
 		if (move) {
 			this.transform.position += new Vector3 (x, y, z);
 		}
+		this.transform.position = new Vector3 (Mathf.Round(transform.position.x * 100f) / 100f,Mathf.Round(transform.position.y * 100f) / 100f,Mathf.Round(transform.position.z * 100f) / 100f);
+
 	}
 }
