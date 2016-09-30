@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	public GameObject goMagicMissile;
 	public ItemType usingItem = ItemType.Nothing;
 
+
 	/*void OnCollisionEnter2D(Collision2D col) {
 		Debug.Log (col.collider.tag);
 		if (col.collider.tag.Equals("Wall")) {

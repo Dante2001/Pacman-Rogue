@@ -14,6 +14,7 @@ public class ItemOnGround : MonoBehaviour {
 		} else if (col.gameObject.tag.Equals ("Player") && type == ItemType.Coin) {
 			GameManager.coins++;
 		}
+		GameManager.mGuiManager.updateStatsAndText ();
 		Destroy (this.gameObject);
 	}
 
