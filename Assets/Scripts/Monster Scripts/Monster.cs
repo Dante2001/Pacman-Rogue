@@ -187,6 +187,9 @@ public class Monster : Hittable {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+		if (col.tag.Equals ("Weapon")) {
+			Destroy (this.gameObject);
+		}
         if (col.name == "Player")
             state = STATE.ATTACK;
     }

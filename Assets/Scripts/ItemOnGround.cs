@@ -20,7 +20,20 @@ public class ItemOnGround : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		if (type.Equals (ItemType.Random)) {
+			switch ((int)Random.Range (0, 3)) {
+			case 0:
+				type = ItemType.Sword;
+				break;
+			case 1:
+				type = ItemType.BowAndArrow;
+				break;
+			case 2:
+				type = ItemType.Wand;
+				break;
+			}
+
+		}
 	}
 	
 	// Update is called once per frame

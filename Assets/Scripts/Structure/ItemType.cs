@@ -10,7 +10,7 @@ public class ItemOnInventory {
 }
 
 namespace ItemHelper {
-	public enum ItemType {Coin,Sword,BowAndArrow,Wand,Nothing};
+	public enum ItemType {Coin,Sword,BowAndArrow,Wand,Random,Nothing};
 
 }
 
